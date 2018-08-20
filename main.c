@@ -1,7 +1,23 @@
 #include<stdio.h>
+int calc(int i,int op1,int op2)
+{
+    switch(i)
+    {
+    case 0:
+        return op1+op2;
+    case 1:
+        return op1-op2;
+    case 2:
+        return op1*op2;
+    case 3:
+        return op1/op2;
+    }
+}
 void forloops(int low,int end,int loops,char name[],int inc,int a[1][4],int ans[3],int n)
 {
     int i, l = low, e = end,count= 0;
+    char op[4] = {'+','-','*','/'};
+
     while(loops>0)
     {
 
@@ -11,55 +27,13 @@ void forloops(int low,int end,int loops,char name[],int inc,int a[1][4],int ans[
             {
                 if(loops == (n-1))
                 {
-                    if(i==0)
-                    {
-                        ans[n-(loops+1)]=a[0][0]+a[0][1];
-                        printf("\n%d+%d=%d",a[0][0],a[0][1],ans[n-(loops+1)]);
-                    }
-                    if(i==1)
-                    {
-                        ans[n-(loops+1)]=a[0][0]-a[0][1];
-                        printf("\n%d-%d=%d",a[0][0],a[0][1],ans[n-(loops+1)]);
-                    }
-                    if(i==2)
-                    {
-                        ans[n-(loops+1)]=a[0][0]*a[0][1];
-                        printf("\n%d*%d=%d",a[0][0],a[0][1],ans[n-(loops+1)]);
-                    }
-                    if(i==3)
-                    {
-                        ans[n-(loops+1)]=a[0][0]/a[0][1];
-                        printf("\n%d/%d=%d",a[0][0],a[0][1],ans[n-(loops+1)]);
-                    }
-
+                    ans[n-(loops+1)]=calc(i,a[0][0],a[0][1]);
+                    printf("\n%d%c%d=%d",a[0][0],op[i],a[0][1],ans[n-(loops+1)]);
                 }
                 else if(loops!=(n-1))
                 {
-
-                    if(i==0)
-                    {
-                        printf("\n%d+%d=",ans[n-(loops+2)],a[0][n-loops]);
-                        ans[n-(loops+1)]=ans[n-(loops+2)]+a[0][n-loops];
-                        printf("%d",ans[n-(loops+1)]);
-                    }
-                    if(i==1)
-                    {
-                        printf("\n%d-%d=",ans[n-(loops+2)],a[0][n-loops]);
-                        ans[n-(loops+1)]=ans[n-(loops+2)]-a[0][n-loops];
-                        printf("%d",ans[n-(loops+1)]);
-                    }
-                    if(i==2)
-                    {
-                        printf("\n%d*%d=",ans[n-(loops+2)],a[0][n-loops]);
-                        ans[n-(loops+1)]=ans[n-(loops+2)]*a[0][n-loops];
-                        printf("%d",ans[n-(loops+1)]);
-                    }
-                    if(i==3)
-                    {
-                        printf("\n%d/%d=",ans[n-(loops+2)],a[0][n-loops]);
-                        ans[n-(loops+1)]=ans[n-(loops+2)]/a[0][n-loops];
-                        printf("%d",ans[n-(loops+1)]);
-                    }
+                    ans[n-(loops+1)]=calc(i,ans[n-(loops+2)],a[0][n-loops]);
+                    printf("\n%d%c%d=%d",ans[n-(loops+2)],op[i],a[0][n-loops],ans[n-(loops+1)]);
                 }
 
                 if(loops > 2)
